@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace ColoringGame
@@ -11,11 +12,27 @@ namespace ColoringGame
 
         public override int SelectField(BoardField[] currentFields)
         {
-            return currentFields
-                .Select((v, i) => new { v, i })
-                .Where(x => x.v == BoardField.Empty)
-                .Select(x => x.i)
-                .First();
+            var availableFields = currentFields
+                .Select((v, i) => new { Value = v, Index = i })
+                .Where(x => x.Value == BoardField.Empty)
+                .ToArray();
+
+            Console.Write($"Available fields for plater {PlayerNumber}: ");
+            for (var i = 0; i < availableFields.Length; ++i)
+            {
+                Console.Write($"{availableFields[i].Index}, ");
+            }
+            Console.WriteLine();
+
+            while (true)
+            {
+                Console.Write($"Please write available field number: ");
+                var read = Console.ReadLine();
+                if (int.TryParse(read, out int v) && availableFields.Any(f => f.Index == v))
+                {
+                    return v;
+                }
+            }
         }
     }
 }
