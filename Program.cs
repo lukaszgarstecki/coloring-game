@@ -6,7 +6,9 @@ namespace ColoringGame
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var board = new Board(5, 3);
+
+            board.PerformGame();
         }
     }
 }
