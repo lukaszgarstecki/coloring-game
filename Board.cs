@@ -20,7 +20,7 @@ namespace ColoringGame
             StreakLength = streakLength;
             Fields = Enumerable.Repeat(BoardField.Empty, size).ToArray();
             Player1 = new HumanPlayer(PlayerNumber.Player1);
-            Player2 = new HumanPlayer(PlayerNumber.Player2);
+            Player2 = new AiPlayer2(PlayerNumber.Player2);
             CurrentPlayer = PlayerNumber.Player1;
             LoosingSequences = GenerateLoosingSequences();
         }

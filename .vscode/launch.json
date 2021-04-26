@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/bin/Debug/netcoreapp3.1/ColoringGame.dll",
-            "args": ["1","2"],
+            "args": ["10","3"],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopAtEntry": false
