@@ -83,7 +83,7 @@ namespace ColoringGame
             for (var i = 0; i < Fields.Length; ++i)
             {
                 Console.BackgroundColor = GetColor(Fields[i]);
-                Console.Write($"{i + 1} ");
+                Console.Write($"{i + 1,4} ");
                 Console.ResetColor();
                 if ((i + 1) % StreakLength == 0)
                 {
