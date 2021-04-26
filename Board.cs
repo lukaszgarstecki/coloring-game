@@ -14,15 +14,15 @@ namespace ColoringGame
         private PlayerNumber CurrentPlayer { get; set; }
         private List<int[]> LoosingSequences { get; }
 
-        public Board(int size, int streakLength)
+        public Board(int size, int streakLength, double alpha, double beta)
         {
             Size = size;
             StreakLength = streakLength;
             Fields = Enumerable.Repeat(BoardField.Empty, size).ToArray();
-            Player1 = new HumanPlayer(PlayerNumber.Player1);
-            Player2 = new AiPlayer2(PlayerNumber.Player2);
-            CurrentPlayer = PlayerNumber.Player1;
             LoosingSequences = GenerateLoosingSequences();
+            Player1 = new HumanPlayer(PlayerNumber.Player1);
+            Player2 = new AiPlayer2(PlayerNumber.Player2, alpha, beta, StreakLength, LoosingSequences);
+            CurrentPlayer = PlayerNumber.Player1;
         }
 
         private List<int[]> GenerateLoosingSequences()

@@ -1,18 +1,27 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ColoringGame
 {
     public class AiPlayer2 : Player
     {
+        public double Alpha { get; }
+        public double Beta { get; }
+        public int StreakLength { get; }
+        public List<int[]> LoosingSequences { get; }
 
-        public AiPlayer2(PlayerNumber playerNumber)
+        public AiPlayer2(PlayerNumber playerNumber, double alpha, double beta, int streakLength, List<int[]> loosingSequences)
             : base(playerNumber)
         {
             if (playerNumber == PlayerNumber.Player1)
             {
                 throw new InvalidOperationException("This AI player can be player 2 only.");
             }
+            Alpha = alpha;
+            Beta = beta;
+            StreakLength = streakLength;
+            LoosingSequences = loosingSequences.Select(s => s.ToArray()).ToList();
         }
 
         public override int SelectField(BoardField[] currentFields)
@@ -23,7 +32,7 @@ namespace ColoringGame
             }
             else
             {
-                throw new NotImplementedException();
+                return OptimizingStrategy(currentFields);
             }
         }
 
@@ -43,6 +52,49 @@ namespace ColoringGame
 
             // Unreachable
             throw new NotImplementedException();
+        }
+
+        private int OptimizingStrategy(BoardField[] currentFields)
+        {
+            var fieldValues = new double[currentFields.Length];
+            for (var i = 0; i < currentFields.Length; ++i)
+            {
+                var currentProlong = new int[StreakLength];
+                var opponentProlong = new int[StreakLength];
+                var sequences = 0;
+
+                if (currentFields[i] != BoardField.Empty)
+                {
+                    fieldValues[i] = double.PositiveInfinity;
+                    continue;
+                }
+                foreach (var s in LoosingSequences.Where(s => s.Contains(i)))
+                {
+                    sequences++;
+                    var emptyFieldsInSequence = s.Select(j => currentFields[j] == BoardField.Empty).Count();
+                    var currentPlayerFieldsInSequence = s.Select(j => currentFields[j] == (BoardField)PlayerNumber).Count();
+                    var opponentPlayerFieldsInSequence = s.Length - emptyFieldsInSequence - currentPlayerFieldsInSequence;
+
+                    if (currentPlayerFieldsInSequence == 0 && opponentPlayerFieldsInSequence > 0)
+                    {
+                        opponentProlong[opponentPlayerFieldsInSequence - 1]++;
+                    }
+                    else if (currentPlayerFieldsInSequence > 0 && opponentPlayerFieldsInSequence == 0)
+                    {
+                        currentProlong[currentPlayerFieldsInSequence - 1]++;
+                    }
+
+
+                    fieldValues[i] = sequences
+                        + 1 / Alpha * opponentProlong.Select((v, j) => v * (j + 1)).Sum()
+                        + 1 / Beta * currentProlong.Select((v, j) => v * (j + 1)).Sum();
+                }
+
+            }
+            return fieldValues.Select((v, i) => new { Value = v, Index = i })
+                .OrderBy(x => x.Value)
+                .Select(x => x.Index)
+                .First();
         }
     }
 }

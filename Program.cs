@@ -6,7 +6,7 @@ namespace ColoringGame
     {
         static void Main(string[] args)
         {
-            if (args.Length != 2)
+            if (args.Length != 4)
             {
                 PrintUsage();
             }
@@ -18,9 +18,17 @@ namespace ColoringGame
             {
                 PrintUsage();
             }
+            else if (!double.TryParse(args[2], out double alpha))
+            {
+                PrintUsage();
+            }
+            else if (!double.TryParse(args[3], out double beta))
+            {
+                PrintUsage();
+            }
             else
             {
-                var board = new Board(size, streakLength);
+                var board = new Board(size, streakLength, alpha, beta);
 
                 board.PerformGame();
             }
@@ -28,7 +36,7 @@ namespace ColoringGame
 
         private static void PrintUsage()
         {
-            Console.WriteLine("2 positional arguments are required: board size and streak length");
+            Console.WriteLine("4 positional arguments are required: board size, streak length, AI alpha and AI beta");
         }
     }
 }
