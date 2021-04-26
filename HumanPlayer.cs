@@ -17,10 +17,10 @@ namespace ColoringGame
                 .Where(x => x.Value == BoardField.Empty)
                 .ToArray();
 
-            Console.Write($"Available fields for plater {PlayerNumber}: ");
+            Console.Write($"Available fields for player {PlayerNumber}: ");
             for (var i = 0; i < availableFields.Length; ++i)
             {
-                Console.Write($"{availableFields[i].Index}, ");
+                Console.Write($"{availableFields[i].Index + 1} ");
             }
             Console.WriteLine();
 
@@ -28,9 +28,9 @@ namespace ColoringGame
             {
                 Console.Write($"Please write available field number: ");
                 var read = Console.ReadLine();
-                if (int.TryParse(read, out int v) && availableFields.Any(f => f.Index == v))
+                if (int.TryParse(read, out int v) && availableFields.Any(f => f.Index == v - 1))
                 {
-                    return v;
+                    return v - 1;
                 }
             }
         }

@@ -78,12 +78,17 @@ namespace ColoringGame
         private void PrintGame(GameStatus gameStatus)
         {
             Console.WriteLine($"Current game status {gameStatus}");
-            Console.Write("Current board state: ");
+            Console.WriteLine("Current board state: ");
             Console.ForegroundColor = ConsoleColor.White;
             for (var i = 0; i < Fields.Length; ++i)
             {
                 Console.BackgroundColor = GetColor(Fields[i]);
-                Console.Write($"{i}, ");
+                Console.Write($"{i + 1} ");
+                Console.ResetColor();
+                if ((i + 1) % StreakLength == 0)
+                {
+                    Console.WriteLine();
+                }
             }
             Console.ResetColor();
             Console.WriteLine();
