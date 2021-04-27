@@ -14,14 +14,14 @@ namespace ColoringGame
         private PlayerNumber CurrentPlayer { get; set; }
         private List<int[]> LoosingSequences { get; }
 
-        public Board(int size, int streakLength, double alpha, double beta)
+        public Board(int size, int streakLength, double alpha, double beta, double gamma)
         {
             Size = size;
             StreakLength = streakLength;
             Fields = Enumerable.Repeat(BoardField.Empty, size).ToArray();
             LoosingSequences = GenerateLoosingSequences();
             Player1 = new HumanPlayer(PlayerNumber.Player1);
-            Player2 = new AiPlayer2(PlayerNumber.Player2, alpha, beta, StreakLength, LoosingSequences);
+            Player2 = new AiPlayer2(PlayerNumber.Player2, alpha, beta, gamma, StreakLength, LoosingSequences);
             CurrentPlayer = PlayerNumber.Player1;
         }
 
@@ -122,12 +122,27 @@ namespace ColoringGame
 
         private GameStatus GetGameStatus()
         {
-            if (LoosingSequences.Where(s => s.All(v => Fields[v] == BoardField.Player1)).Any())
+            if (LoosingSequences.Where(s => s.All(v => Fields[v] == BoardField.Player1)).FirstOrDefault() is int[] sequence1)
             {
+                Console.WriteLine("Player 1 created loosing sequence:");
+                Console.ForegroundColor = ConsoleColor.White;
+                foreach (var i in sequence1)
+                {
+                    Console.Write($"{i + 1,4} ");
+                }
+                Console.WriteLine();
+
                 return GameStatus.Player2Won;
             }
-            else if (LoosingSequences.Where(s => s.All(v => Fields[v] == BoardField.Player2)).Any())
+            else if (LoosingSequences.Where(s => s.All(v => Fields[v] == BoardField.Player2)).FirstOrDefault() is int[] sequence2)
             {
+                Console.WriteLine("Player 2 created loosing sequence:");
+                Console.ForegroundColor = ConsoleColor.White;
+                foreach (var i in sequence2)
+                {
+                    Console.Write($"{i + 1,4} ");
+                }
+                Console.WriteLine();
                 return GameStatus.Player1Won;
             }
             else if (Fields.All(v => v != BoardField.Empty))

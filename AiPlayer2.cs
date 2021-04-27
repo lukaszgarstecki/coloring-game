@@ -8,10 +8,11 @@ namespace ColoringGame
     {
         public double Alpha { get; }
         public double Beta { get; }
+        public double Gamma { get; }
         public int StreakLength { get; }
         public List<int[]> LoosingSequences { get; }
 
-        public AiPlayer2(PlayerNumber playerNumber, double alpha, double beta, int streakLength, List<int[]> loosingSequences)
+        public AiPlayer2(PlayerNumber playerNumber, double alpha, double beta, double gamma, int streakLength, List<int[]> loosingSequences)
             : base(playerNumber)
         {
             if (playerNumber == PlayerNumber.Player1)
@@ -20,6 +21,7 @@ namespace ColoringGame
             }
             Alpha = alpha;
             Beta = beta;
+            Gamma = gamma;
             StreakLength = streakLength;
             LoosingSequences = loosingSequences.Select(s => s.ToArray()).ToList();
         }
@@ -86,8 +88,8 @@ namespace ColoringGame
 
 
                     fieldValues[i] = sequences
-                        + 1 / Alpha * opponentProlong.Select((v, j) => v * (j + 1)).Sum()
-                        + 1 / Beta * currentProlong.Select((v, j) => v * (j + 1)).Sum();
+                        + 1 / Alpha * (opponentProlong.Select((v, j) => v * (j + 1)).Sum() + Gamma * opponentProlong[StreakLength - 2])
+                        + 1 / Beta * (currentProlong.Select((v, j) => v * (j + 1)).Sum() + 2 * Beta / Alpha * Gamma * opponentProlong[StreakLength - 2]);
                 }
 
             }
