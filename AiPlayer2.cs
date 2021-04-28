@@ -108,7 +108,7 @@ namespace ColoringGame
 
                 fieldValues[i] = sequences
                     + 1 / Alpha * (opponentProlong.Select((v, j) => v * (j + 1)).Sum() + Gamma * opponentProlong[StreakLength - 2])
-                    + 1 / Beta * (currentProlong.Select((v, j) => v * (j + 1)).Sum() + 2 * Beta / Alpha * Gamma * opponentProlong[StreakLength - 2]);
+                    + 1 / Beta * (currentProlong.Select((v, j) => v * (j + 1)).Sum() + 2 * Beta / Alpha * Gamma * currentProlong[StreakLength - 2]);
 
             }
             return fieldValues.Select((v, i) => new { Value = v, Index = i })
