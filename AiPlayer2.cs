@@ -120,19 +120,20 @@ namespace ColoringGame
                         currentProlong.Take(currentProlong.Length - 2).Select((v, j) => v * (j + 1)).Sum()
                         + 2 * Beta / Alpha * Gamma * Math.Min(currentProlong[StreakLength - 2], 1));
                 Console.WriteLine($"Calculated field value: {fieldValues[i]}");
-
-                Console.WriteLine("Calculated field values:");
-                for (var i = 0; i < fieldValues.Length; ++i)
-                {
-                    Console.WriteLine($"{i + 1}: {fieldValues[i]}");
-                }
-                Console.WriteLine();
-
-
-                return fieldValues.Select((v, i) => new { Value = v, Index = i })
-                    .OrderBy(x => x.Value)
-                    .Select(x => x.Index)
-                    .First();
             }
+
+            Console.WriteLine("Calculated field values:");
+            for (var i = 0; i < fieldValues.Length; ++i)
+            {
+                Console.WriteLine($"{i + 1}: {fieldValues[i]}");
+            }
+            Console.WriteLine();
+
+
+            return fieldValues.Select((v, i) => new { Value = v, Index = i })
+                .OrderBy(x => x.Value)
+                .Select(x => x.Index)
+                .First();
         }
     }
+}
