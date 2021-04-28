@@ -16,6 +16,11 @@ namespace ColoringGame
 
         public Board(int size, int streakLength, double alpha, double beta, double gamma)
         {
+            // Size = 5;
+            // StreakLength = 3;
+            // Fields = new BoardField[] { BoardField.Empty, BoardField.Player1, BoardField.Empty, BoardField.Player1, BoardField.Player2 };
+            // CurrentPlayer = PlayerNumber.Player2;
+
             Size = size;
             StreakLength = streakLength;
             Fields = Enumerable.Repeat(BoardField.Empty, size).ToArray();

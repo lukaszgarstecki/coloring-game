@@ -72,10 +72,16 @@ namespace ColoringGame
                 }
                 foreach (var s in LoosingSequences.Where(s => s.Contains(i)))
                 {
+                    // foreach (var j in s)
+                    // {
+                    // Console.Write($"{j + 1,4} ");
+                    // }
+                    // Console.WriteLine();
                     sequences++;
-                    var emptyFieldsInSequence = s.Select(j => currentFields[j] == BoardField.Empty).Count();
-                    var currentPlayerFieldsInSequence = s.Select(j => currentFields[j] == (BoardField)PlayerNumber).Count();
+                    var emptyFieldsInSequence = s.Where(j => currentFields[j] == BoardField.Empty).Count();
+                    var currentPlayerFieldsInSequence = s.Where(j => currentFields[j] == (BoardField)PlayerNumber).Count();
                     var opponentPlayerFieldsInSequence = s.Length - emptyFieldsInSequence - currentPlayerFieldsInSequence;
+                    // Console.WriteLine($"{emptyFieldsInSequence} {currentPlayerFieldsInSequence} {opponentPlayerFieldsInSequence}");
 
                     if (currentPlayerFieldsInSequence == 0 && opponentPlayerFieldsInSequence > 0)
                     {
@@ -85,12 +91,24 @@ namespace ColoringGame
                     {
                         currentProlong[currentPlayerFieldsInSequence - 1]++;
                     }
-
-
-                    fieldValues[i] = sequences
-                        + 1 / Alpha * (opponentProlong.Select((v, j) => v * (j + 1)).Sum() + Gamma * opponentProlong[StreakLength - 2])
-                        + 1 / Beta * (currentProlong.Select((v, j) => v * (j + 1)).Sum() + 2 * Beta / Alpha * Gamma * opponentProlong[StreakLength - 2]);
                 }
+
+                // Console.WriteLine($"Current field: {i + 1}");
+                // Console.WriteLine("Opponent sequences:");
+                // for (var j = 0; j < opponentProlong.Length; ++j)
+                // {
+                //     Console.WriteLine($"{j + 1}:{opponentProlong[j]}");
+                // }
+                // Console.WriteLine("Current sequences:");
+                // for (var j = 0; j < currentProlong.Length; ++j)
+                // {
+                //     Console.WriteLine($"{j + 1}:{currentProlong[j]}");
+                // }
+                // Console.WriteLine($"Sequences count: {sequences}");
+
+                fieldValues[i] = sequences
+                    + 1 / Alpha * (opponentProlong.Select((v, j) => v * (j + 1)).Sum() + Gamma * opponentProlong[StreakLength - 2])
+                    + 1 / Beta * (currentProlong.Select((v, j) => v * (j + 1)).Sum() + 2 * Beta / Alpha * Gamma * opponentProlong[StreakLength - 2]);
 
             }
             return fieldValues.Select((v, i) => new { Value = v, Index = i })
