@@ -65,23 +65,30 @@ namespace ColoringGame
                 var opponentProlong = new int[StreakLength];
                 var sequences = 0;
 
+                Console.WriteLine($"Current field: {i + 1}");
+
                 if (currentFields[i] != BoardField.Empty)
                 {
+
+                    Console.WriteLine("Field not empty, ignoring");
                     fieldValues[i] = double.PositiveInfinity;
                     continue;
                 }
                 foreach (var s in LoosingSequences.Where(s => s.Contains(i)))
                 {
-                    // foreach (var j in s)
-                    // {
-                    // Console.Write($"{j + 1,4} ");
-                    // }
-                    // Console.WriteLine();
+                    Console.WriteLine("Processing sequence:");
+                    foreach (var j in s)
+                    {
+                        Console.Write($"{j + 1,4} ");
+                    }
+                    Console.WriteLine();
                     sequences++;
                     var emptyFieldsInSequence = s.Where(j => currentFields[j] == BoardField.Empty).Count();
                     var currentPlayerFieldsInSequence = s.Where(j => currentFields[j] == (BoardField)PlayerNumber).Count();
                     var opponentPlayerFieldsInSequence = s.Length - emptyFieldsInSequence - currentPlayerFieldsInSequence;
-                    // Console.WriteLine($"{emptyFieldsInSequence} {currentPlayerFieldsInSequence} {opponentPlayerFieldsInSequence}");
+                    Console.WriteLine($"Empty fields in sequence count:{emptyFieldsInSequence}");
+                    Console.WriteLine($"Current player fields in sequence count:{currentPlayerFieldsInSequence}");
+                    Console.WriteLine($"Opponent player fields in sequence count:{opponentPlayerFieldsInSequence}");
 
                     if (currentPlayerFieldsInSequence == 0 && opponentPlayerFieldsInSequence > 0)
                     {
@@ -93,24 +100,33 @@ namespace ColoringGame
                     }
                 }
 
-                // Console.WriteLine($"Current field: {i + 1}");
-                // Console.WriteLine("Opponent sequences:");
-                // for (var j = 0; j < opponentProlong.Length; ++j)
-                // {
-                //     Console.WriteLine($"{j + 1}:{opponentProlong[j]}");
-                // }
-                // Console.WriteLine("Current sequences:");
-                // for (var j = 0; j < currentProlong.Length; ++j)
-                // {
-                //     Console.WriteLine($"{j + 1}:{currentProlong[j]}");
-                // }
-                // Console.WriteLine($"Sequences count: {sequences}");
+                Console.WriteLine("Opponent sequences:");
+                for (var j = 0; j < opponentProlong.Length; ++j)
+                {
+                    Console.WriteLine($"{j + 1}:{opponentProlong[j]}");
+                }
+                Console.WriteLine("Current sequences:");
+                for (var j = 0; j < currentProlong.Length; ++j)
+                {
+                    Console.WriteLine($"{j + 1}:{currentProlong[j]}");
+                }
+                Console.WriteLine($"Sequences count: {sequences}");
 
                 fieldValues[i] = sequences
                     + 1 / Alpha * (opponentProlong.Select((v, j) => v * (j + 1)).Sum() + Gamma * opponentProlong[StreakLength - 2])
                     + 1 / Beta * (currentProlong.Select((v, j) => v * (j + 1)).Sum() + 2 * Beta / Alpha * Gamma * opponentProlong[StreakLength - 2]);
+                Console.WriteLine($"Calculated field value: {fieldValues[i]}");
 
             }
+
+            Console.WriteLine("Calculated field values:");
+            for (var i = 0; i < fieldValues.Length; ++i)
+            {
+                Console.WriteLine($"{i + 1}: {fieldValues[i]}");
+            }
+            Console.WriteLine();
+
+
             return fieldValues.Select((v, i) => new { Value = v, Index = i })
                 .OrderBy(x => x.Value)
                 .Select(x => x.Index)
