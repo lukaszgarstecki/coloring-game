@@ -113,10 +113,10 @@ namespace ColoringGame
                 // Console.WriteLine($"Sequences count: {sequences}");
 
                 fieldValues[i] = sequences
-                    + 1 / Alpha * (
+                    + Alpha * (
                         opponentProlong.Take(opponentProlong.Length - 2).Select((v, j) => v * (j + 1)).Sum()
                         + Gamma * Math.Min(opponentProlong[StreakLength - 2], 1))
-                    + 1 / Beta * (
+                    + Beta * (
                         currentProlong.Take(currentProlong.Length - 2).Select((v, j) => v * (j + 1)).Sum()
                         + 2 * Gamma * Math.Min(currentProlong[StreakLength - 2], 1));
 
