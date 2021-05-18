@@ -12,16 +12,22 @@ namespace ColoringGame
         public int StreakLength { get; }
         public List<int[]> LoosingSequences { get; }
 
-        public AiPlayer2(PlayerNumber playerNumber, double alpha, double beta, double gamma, int streakLength, List<int[]> loosingSequences)
+        public AiPlayer2(PlayerNumber playerNumber, double alpha, int boardSize, int streakLength, List<int[]> loosingSequences)
             : base(playerNumber)
         {
             if (playerNumber == PlayerNumber.Player1)
             {
                 throw new InvalidOperationException("This AI player can be player 2 only.");
             }
+
+            if (alpha > 1 || alpha < 0)
+            {
+                throw new ArgumentException("alpha must be double from [0, 1]", nameof(alpha));
+            }
+
             Alpha = alpha;
-            Beta = beta;
-            Gamma = gamma;
+            Beta = 1 - alpha;
+            Gamma = Math.Pow(boardSize, 3);
             StreakLength = streakLength;
             LoosingSequences = loosingSequences.Select(s => s.ToArray()).ToList();
         }
@@ -112,7 +118,7 @@ namespace ColoringGame
                         + Gamma * Math.Min(opponentProlong[StreakLength - 2], 1))
                     + 1 / Beta * (
                         currentProlong.Take(currentProlong.Length - 2).Select((v, j) => v * (j + 1)).Sum()
-                        + 2 * Beta / Alpha * Gamma * Math.Min(currentProlong[StreakLength - 2], 1));
+                        + 2 * Gamma * Math.Min(currentProlong[StreakLength - 2], 1));
 
             }
             return fieldValues.Select((v, i) => new { Value = v, Index = i })

@@ -14,7 +14,7 @@ namespace ColoringGame
         private PlayerNumber CurrentPlayer { get; set; }
         private List<int[]> LoosingSequences { get; }
 
-        public Board(int size, int streakLength, double alpha, double beta, double gamma)
+        public Board(int size, int streakLength, double alpha)
         {
             // Size = 5;
             // StreakLength = 3;
@@ -26,7 +26,7 @@ namespace ColoringGame
             Fields = Enumerable.Repeat(BoardField.Empty, size).ToArray();
             LoosingSequences = GenerateLoosingSequences();
             Player1 = new HumanPlayer(PlayerNumber.Player1);
-            Player2 = new AiPlayer2(PlayerNumber.Player2, alpha, beta, gamma, StreakLength, LoosingSequences);
+            Player2 = new AiPlayer2(PlayerNumber.Player2, alpha, size, StreakLength, LoosingSequences);
             CurrentPlayer = PlayerNumber.Player1;
         }
 
