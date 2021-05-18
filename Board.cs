@@ -14,7 +14,7 @@ namespace ColoringGame
         private PlayerNumber CurrentPlayer { get; set; }
         private List<int[]> LoosingSequences { get; }
 
-        public Board(int size, int streakLength, double alpha)
+        public Board(int size, int streakLength, double alpha, Player player1)
         {
             // Size = 5;
             // StreakLength = 3;
@@ -25,7 +25,7 @@ namespace ColoringGame
             StreakLength = streakLength;
             Fields = Enumerable.Repeat(BoardField.Empty, size).ToArray();
             LoosingSequences = GenerateLoosingSequences();
-            Player1 = new HumanPlayer(PlayerNumber.Player1);
+            Player1 = player1;
             Player2 = new AiPlayer2(PlayerNumber.Player2, alpha, size, StreakLength, LoosingSequences);
             CurrentPlayer = PlayerNumber.Player1;
         }
@@ -74,7 +74,7 @@ namespace ColoringGame
                 }
                 gameStatus = GetGameStatus();
 
-                PrintGame(gameStatus);
+                // PrintGame(gameStatus);
             }
 
             return gameStatus;
@@ -129,25 +129,26 @@ namespace ColoringGame
         {
             if (LoosingSequences.Where(s => s.All(v => Fields[v] == BoardField.Player1)).FirstOrDefault() is int[] sequence1)
             {
-                Console.WriteLine("Player 1 created loosing sequence:");
-                Console.ForegroundColor = ConsoleColor.White;
-                foreach (var i in sequence1)
-                {
-                    Console.Write($"{i + 1,4} ");
-                }
-                Console.WriteLine();
+                // Console.WriteLine("Player 1 created loosing sequence:");
+                // Console.ForegroundColor = ConsoleColor.White;
+                // foreach (var i in sequence1)
+                // {
+                //     Console.Write($"{i + 1,4} ");
+                // }
+                // Console.WriteLine();
 
                 return GameStatus.Player2Won;
             }
             else if (LoosingSequences.Where(s => s.All(v => Fields[v] == BoardField.Player2)).FirstOrDefault() is int[] sequence2)
             {
-                Console.WriteLine("Player 2 created loosing sequence:");
-                Console.ForegroundColor = ConsoleColor.White;
-                foreach (var i in sequence2)
-                {
-                    Console.Write($"{i + 1,4} ");
-                }
-                Console.WriteLine();
+                // Console.WriteLine("Player 2 created loosing sequence:");
+                // Console.ForegroundColor = ConsoleColor.White;
+                // foreach (var i in sequence2)
+                // {
+                //     Console.Write($"{i + 1,4} ");
+                // }
+                // Console.WriteLine();
+
                 return GameStatus.Player1Won;
             }
             else if (Fields.All(v => v != BoardField.Empty))
