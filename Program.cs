@@ -24,8 +24,24 @@ namespace ColoringGame
             }
             else
             {
-                var alpha = version == 1 ? 0.25 : version == 2 ? 0.5 : 0.75;
-
+                var alpha = -1.0;
+                if (version == 1)
+                {
+                    alpha = 0.25;
+                }
+                else if (version == 2)
+                {
+                    alpha = 0.5;
+                }
+                else if (version == 3)
+                {
+                    alpha = 0.75;
+                }
+                else
+                {
+                    PrintUsage();
+                    return;
+                }
                 var board = new Board(size, streakLength, alpha);
 
                 board.PerformGame();
