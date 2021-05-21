@@ -18,12 +18,14 @@ namespace ColoringGame
             {
                 PrintUsage();
             }
-            else if (!double.TryParse(args[2], out double alpha))
+            else if (!int.TryParse(args[2], out int version))
             {
                 PrintUsage();
             }
             else
             {
+                var alpha = version == 1 ? 0.25 : version == 2 ? 0.5 : 0.75;
+
                 var board = new Board(size, streakLength, alpha);
 
                 board.PerformGame();
@@ -32,7 +34,10 @@ namespace ColoringGame
 
         private static void PrintUsage()
         {
-            Console.WriteLine("3 positional arguments are required: board size, streak length, AI alpha");
+            Console.WriteLine("3 positional arguments are required: board size, streak length, AI type");
+            Console.WriteLine("1 => AI offensive");
+            Console.WriteLine("2 => AI balanced");
+            Console.WriteLine("3 => AI defensive");
         }
     }
 }
