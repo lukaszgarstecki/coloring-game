@@ -27,7 +27,7 @@ namespace ColoringGame
                 var alpha = -1.0;
                 if (version == 1)
                 {
-                    alpha = 0.25;
+                    alpha = 0.75;
                 }
                 else if (version == 2)
                 {
@@ -35,7 +35,7 @@ namespace ColoringGame
                 }
                 else if (version == 3)
                 {
-                    alpha = 0.75;
+                    alpha = 0.25;
                 }
                 else
                 {
