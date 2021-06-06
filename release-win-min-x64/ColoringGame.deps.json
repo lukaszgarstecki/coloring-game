@@ -1,51 +1,83 @@
 {
   "runtimeTarget": {
-    "name": ".NETCoreApp,Version=v3.1/win-x64",
+    "name": ".NETCoreApp,Version=v5.0/win-x64",
     "signature": ""
   },
   "compilationOptions": {},
   "targets": {
-    ".NETCoreApp,Version=v3.1": {},
-    ".NETCoreApp,Version=v3.1/win-x64": {
+    ".NETCoreApp,Version=v5.0": {},
+    ".NETCoreApp,Version=v5.0/win-x64": {
       "ColoringGame/1.0.0": {
         "dependencies": {
-          "runtimepack.Microsoft.NETCore.App.Runtime.win-x64": "3.1.15"
+          "runtimepack.Microsoft.NETCore.App.Runtime.win-x64": "5.0.6"
         },
         "runtime": {
           "ColoringGame.dll": {}
         }
       },
-      "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/3.1.15": {
+      "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/5.0.6": {
         "runtime": {
-          "System.Console.dll": {
-            "assemblyVersion": "4.1.2.0",
-            "fileVersion": "4.700.21.21402"
+          "System.Collections.Concurrent.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.621.22011"
           },
-          "System.Diagnostics.Tools.dll": {
-            "assemblyVersion": "4.1.2.0",
-            "fileVersion": "4.700.21.21402"
+          "System.Collections.Immutable.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.621.22011"
+          },
+          "System.Collections.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.621.22011"
+          },
+          "System.Console.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.621.22011"
+          },
+          "System.Diagnostics.StackTrace.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.621.22011"
+          },
+          "System.IO.Compression.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.621.22011"
+          },
+          "System.IO.FileSystem.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.621.22011"
+          },
+          "System.IO.MemoryMappedFiles.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.621.22011"
           },
           "System.Linq.dll": {
-            "assemblyVersion": "4.2.2.0",
-            "fileVersion": "4.700.21.21402"
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.621.22011"
           },
-          "System.Runtime.Extensions.dll": {
-            "assemblyVersion": "4.2.2.0",
-            "fileVersion": "4.700.21.21402"
+          "System.Reflection.Metadata.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.621.22011"
+          },
+          "System.Runtime.CompilerServices.Unsafe.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.621.22011"
+          },
+          "System.Runtime.Serialization.Formatters.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.621.22011"
+          },
+          "System.Private.CoreLib.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.621.22011"
           }
         },
         "native": {
           "Microsoft.DiaSymReader.Native.amd64.dll": {
             "fileVersion": "0.0.0.0"
           },
-          "SOS_README.md": {
+          "api-ms-win-core-console-l1-1-0.dll": {
             "fileVersion": "0.0.0.0"
           },
-          "System.Private.CoreLib.dll": {
-            "assemblyVersion": "4.0.0.0",
-            "fileVersion": "4.700.21.21202"
-          },
-          "api-ms-win-core-console-l1-1-0.dll": {
+          "api-ms-win-core-console-l1-2-0.dll": {
             "fileVersion": "0.0.0.0"
           },
           "api-ms-win-core-datetime-l1-1-0.dll": {
@@ -177,6 +209,9 @@
           "coreclr.dll": {
             "fileVersion": "0.0.0.0"
           },
+          "createdump.exe": {
+            "fileVersion": "0.0.0.0"
+          },
           "dbgshim.dll": {
             "fileVersion": "0.0.0.0"
           },
@@ -189,13 +224,10 @@
           "mscordaccore.dll": {
             "fileVersion": "0.0.0.0"
           },
-          "mscordaccore_amd64_amd64_4.700.21.21202.dll": {
+          "mscordaccore_amd64_amd64_5.0.621.22011.dll": {
             "fileVersion": "0.0.0.0"
           },
           "mscordbi.dll": {
-            "fileVersion": "0.0.0.0"
-          },
-          "mscorrc.debug.dll": {
             "fileVersion": "0.0.0.0"
           },
           "mscorrc.dll": {
@@ -214,7 +246,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/3.1.15": {
+    "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/5.0.6": {
       "type": "runtimepack",
       "serviceable": false,
       "sha512": ""
