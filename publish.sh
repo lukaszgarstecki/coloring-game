@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
-dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained true -p:PublishReadyToRun=false -p:PublishTrimmed=true -o release-linux-x64
-dotnet publish -r win-x64 -p:PublishSingleFile=true --self-contained true -p:PublishReadyToRun=false -p:PublishTrimmed=true -o release-win-x64
-dotnet publish -r win-x64  -p:PublishTrimmed=true -o release-win-min-x64
+# dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained true -p:PublishReadyToRun=false -p:PublishTrimmed=true -o release-linux-x64
+# dotnet publish -r win-x64 -p:PublishSingleFile=true --self-contained true -p:PublishReadyToRun=false -p:PublishTrimmed=true -o release-win-x64
+# dotnet publish -r win-x64  -p:PublishTrimmed=true -o release-win-min-x64
+dotnet msbuild -property:Configuration=Release  -property:RuntimeIdentifiers=win10-x64
